@@ -39,7 +39,12 @@ var grillaPixeles = document.getElementById('grilla-pixeles');
 var cadaColor = document.getElementsByClassName('color-paleta');
 var indicadorDeColor = document.getElementById('indicador-de-color');
 var pixelesGrilla = document.getElementById('grilla-pixeles').children;
-// var botonBorrar = $('#borrar');
+var botonBorrar = $('#borrar');
+// var superheroes = [$('#batman'), $('#wonder'), $('#flash'),$('#batman')];
+// var batman = $('#batman');
+// var wonder = $('#wonder');
+// var flash = $('#flash');
+// var invisible= $('#batman');
 
 
 
@@ -73,23 +78,79 @@ function indicarColor(e) {
 }
 
 // pintar pixeles guia 2
+var pintando = false
 function eventoPixelesGrilla() {
   for (var i = 0; i < pixelesGrilla.length; i++) {
-    pixelesGrilla[i].addEventListener('click', pintarPixel);
+    pixelesGrilla[i].addEventListener('click', pintarUnPixel);
+    pixelesGrilla[i].addEventListener('mousedown', pintarPixeles);
+    pixelesGrilla[i].addEventListener('mousemove', pintarEnMovimiento);
+    pixelesGrilla[i].addEventListener('mouseup', dejarDePintar);
   }
 }
 
-function pintarPixel(e) {
+function pintarUnPixel(e) {
   e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
 }
 
+function pintarPixeles(e) {
+  e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+  pintando = true;
+}
+
+function pintarEnMovimiento(e) {
+  if (pintando) {
+    e.target.style.backgroundColor = indicadorDeColor.style.backgroundColor;
+  }
+}
+
+function dejarDePintar(e) {
+  pintando = false;
+}
+
+
+function probarSiEstaPintando() {
+  if (pintando) {
+    pintarPixel();
+  } else {
+    return false;
+  }  
+}
+
+
+function prueba() {
+  console.log('mouse abajo');
+}
+
+function prueba2() {
+  console.log('moviendo mouse');
+}
+
+function prueba3() {
+  console.log('mouse arriba');
+}
+
 // borrar pixeles guia 3
-// botonBorrar.click(borrarGrilla);
-// function borrarGrilla() {
-//   var $pixelesGrilla = $('#grilla-pixeles div').animate (
-//     {'backgroundColor':'white'}, 500);
+botonBorrar.click(borrarGrilla);
+function borrarGrilla() {
+  var $pixelesGrilla = $('#grilla-pixeles div').animate (
+    {'backgroundColor':'white'}, 500);
+}
+
+//cargar superheroe guia 3
+// batman.click(cargarSuperheroe);
+// wonder.click(cargarSuperheroe);
+// flash.click(cargarSuperheroe);
+// invisible.click(cargarSuperheroe);
+
+// function eventoSuperheroes() {
+//   for (var i= 0; i < superheroes.length; i++) {
+//     superheroes[i].click(prueba);
+//   }
 // }
 
+// function prueba () {
+//   console.log("click aca");
+// }
 
 // ejecutando funciones
 
