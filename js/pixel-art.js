@@ -40,11 +40,9 @@ var cadaColor = document.getElementsByClassName('color-paleta');
 var indicadorDeColor = document.getElementById('indicador-de-color');
 var pixelesGrilla = document.getElementById('grilla-pixeles').children;
 var botonBorrar = $('#borrar');
-// var superheroes = [$('#batman'), $('#wonder'), $('#flash'),$('#batman')];
-// var batman = $('#batman');
-// var wonder = $('#wonder');
-// var flash = $('#flash');
-// var invisible= $('#batman');
+var superheroe = [$('#batman'), $('#wonder'), $('#flash'), $('#invisible')];
+var guardar = $('#guardar')
+
 
 
 
@@ -103,54 +101,44 @@ function pintarEnMovimiento(e) {
   }
 }
 
-function dejarDePintar(e) {
+function dejarDePintar() {
   pintando = false;
-}
-
-
-function probarSiEstaPintando() {
-  if (pintando) {
-    pintarPixel();
-  } else {
-    return false;
-  }  
-}
-
-
-function prueba() {
-  console.log('mouse abajo');
-}
-
-function prueba2() {
-  console.log('moviendo mouse');
-}
-
-function prueba3() {
-  console.log('mouse arriba');
 }
 
 // borrar pixeles guia 3
 botonBorrar.click(borrarGrilla);
+
 function borrarGrilla() {
   var $pixelesGrilla = $('#grilla-pixeles div').animate (
     {'backgroundColor':'white'}, 500);
 }
 
 //cargar superheroe guia 3
-// batman.click(cargarSuperheroe);
-// wonder.click(cargarSuperheroe);
-// flash.click(cargarSuperheroe);
-// invisible.click(cargarSuperheroe);
 
-// function eventoSuperheroes() {
-//   for (var i= 0; i < superheroes.length; i++) {
-//     superheroes[i].click(prueba);
-//   }
-// }
+function eventoSuperheroe() {
+  for (var i=0; i < superheroe.length; i++) {
+    superheroe[i].click(elegirSuperheroe);
+  }
+}
 
-// function prueba () {
-//   console.log("click aca");
-// }
+function elegirSuperheroe() {
+  if ($(this).attr('id') === 'batman') {
+    cargarSuperheroe(batman)
+  } else if ($(this).attr('id') === 'wonder') {
+    cargarSuperheroe(wonder)
+  } else if ($(this).attr('id') === 'flash') {
+    cargarSuperheroe(flash)
+  } else {
+    cargarSuperheroe(invisible)
+  }  
+}
+
+// guardar imagen guia 3
+function eventoGuardar() {
+  guardar.click(guardarPixelArt);
+}
+
+
 
 // ejecutando funciones
 
@@ -158,3 +146,5 @@ generarGrillaPixeles();
 generarPaletaDeColores();
 eventoIndicadorDeColor();
 eventoPixelesGrilla();
+eventoSuperheroe();
+eventoGuardar();
