@@ -29,7 +29,6 @@ colorPersonalizado.addEventListener('change', (function() {
     colorActual = colorPersonalizado.value;
     // Completar para que cambie el indicador-de-color al colorActual
     indicadorDeColor.style.backgroundColor = colorActual;
-
   })
 );
 
@@ -41,12 +40,19 @@ var indicadorDeColor = document.getElementById('indicador-de-color');
 var pixelesGrilla = document.getElementById('grilla-pixeles').children;
 var botonBorrar = $('#borrar');
 var superheroe = [$('#batman'), $('#wonder'), $('#flash'), $('#invisible')];
-var guardar = $('#guardar')
+var guardar = $('#guardar');
 
 
+//ejecución de funciones
+$(document).ready(function() {
+  generarGrillaPixeles();
+  generarPaletaDeColores();
+  eventoIndicadorDeColor();
+  eventoPixelesGrilla();
+  eventoSuperheroe();
+});
 
-
-//generar paleta de colores guia 1
+//generar paleta de colores
 function generarPaletaDeColores() {
   for (var i = 0; i < nombreColores.length; i++) {
     var div = document.createElement('div');
@@ -56,15 +62,15 @@ function generarPaletaDeColores() {
   }
 }
 
-// generar grilla de pixeles guia 1
+//generar grilla de pixeles
 function generarGrillaPixeles() {
-  for (var i = 0; i < 1750; i++) {
+  for (var i = 0; i < 1749; i++) {
     var div = document.createElement('div');
     grillaPixeles.appendChild(div);
   }
 }
 
-// actualizar indicar de color guia 2
+// actualizar indicador de color
 function eventoIndicadorDeColor() {
   for (var i = 0; i < cadaColor.length; i++) {
     cadaColor[i].addEventListener('click', indicarColor);
@@ -75,7 +81,7 @@ function indicarColor(e) {
   indicadorDeColor.style.backgroundColor = e.target.style.backgroundColor;
 }
 
-// pintar pixeles guia 2
+//pintar pixeles
 var pintando = false
 function eventoPixelesGrilla() {
   for (var i = 0; i < pixelesGrilla.length; i++) {
@@ -105,7 +111,7 @@ function dejarDePintar() {
   pintando = false;
 }
 
-// borrar pixeles guia 3
+//borrar pixeles
 botonBorrar.click(borrarGrilla);
 
 function borrarGrilla() {
@@ -113,7 +119,7 @@ function borrarGrilla() {
     {'backgroundColor':'white'}, 500);
 }
 
-//cargar superheroe guia 3
+//cargar superheroe
 
 function eventoSuperheroe() {
   for (var i=0; i < superheroe.length; i++) {
@@ -133,18 +139,6 @@ function elegirSuperheroe() {
   }  
 }
 
-// guardar imagen guia 3
-function eventoGuardar() {
-  guardar.click(guardarPixelArt);
-}
+//guardar imagen
+guardar.click(guardarPixelArt);
 
-
-
-// ejecutando funciones
-
-generarGrillaPixeles();
-generarPaletaDeColores();
-eventoIndicadorDeColor();
-eventoPixelesGrilla();
-eventoSuperheroe();
-eventoGuardar();
